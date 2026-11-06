@@ -131,6 +131,7 @@ run.
 
 ```sh
 cargo run -p xtask -- gate              # format, clippy, style, no_std, tests, VOPR, canaries
+cargo run -p xtask -- gate --no-canaries --seeds 200   # the fast form CI runs on every push
 cargo run -p xtask -- canaries          # plant each bug, and require it to be caught
 hypertiger-vopr --trace 1369            # replay a seed, printing every decisive event
 ```

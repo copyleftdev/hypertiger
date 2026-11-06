@@ -1,0 +1,61 @@
+# The same gate as `cargo run -p xtask -- gate`, so that CI cannot pass what a person's run would fail.
+#
+# Every push and pull request gets the fast form. The canaries rebuild the tree once per planted bug,
+# so they run weekly and on demand. Mutation testing is not here: it runs only when asked, on what
+# changed, through `bounded-mutants`. Nothing here touches the network past fetching dependencies:
+# the live exchange checks (`ht conformance`) are run by hand, and this workflow holds no secrets.
+name: gate
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  schedule:
+    - cron: "17 6 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: gate-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  # Pinned, because `-D warnings` means a new compiler's new lint would otherwise fail unrelated work.
+  # Move it on purpose.
+  RUST_VERSION: "1.99.0"
+  CARGO_TERM_COLOR: always
+
+jobs:
+  fast:
+    if: github.event_name == 'push' || github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Install the toolchain
+        run: |
+          rustup toolchain install "$RUST_VERSION" --profile minimal \
+            --component clippy --component rustfmt --target x86_64-unknown-none
+          rustup default "$RUST_VERSION"
+      - name: Gate
+        run: cargo run -p xtask -- gate --seeds 200 --no-canaries
+
+  full:
+    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Install the toolchain
+        run: |
+          rustup toolchain install "$RUST_VERSION" --profile minimal \
+            --component clippy --component rustfmt --target x86_64-unknown-none
+          rustup default "$RUST_VERSION"
+      - name: Gate, with every canary
+        run: cargo run -p xtask -- gate --seeds 2000

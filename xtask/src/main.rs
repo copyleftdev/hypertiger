@@ -1,6 +1,6 @@
 //! The gate, written in the project's own language: TigerStyle's rule for tools.
 //!
-//!     cargo run -p xtask -- gate [--seeds N] [--mutants]
+//!     cargo run -p xtask -- gate [--seeds N] [--no-canaries] [--mutants]
 //!     cargo run -p xtask -- style
 //!     cargo run -p xtask -- canaries [--only NAME]
 //!
@@ -27,7 +27,7 @@ fn main() -> ExitCode {
         Some("style") => style::check(&root),
         Some("canaries") => canaries::run(&root, &arguments[1..]),
         _ => {
-            Err("usage: xtask gate [--seeds N] [--mutants] | style | canaries [--only NAME]".into())
+            Err("usage: xtask gate [--seeds N] [--no-canaries] [--mutants] | style | canaries [--only NAME]".into())
         }
     };
     match result {
@@ -107,8 +107,13 @@ fn gate(root: &Path, arguments: &[String]) -> Result<(), String> {
     step("VOPR: determinism");
     run(root, &vopr, &["--from", "70000", "--seeds", "40", "--jobs", JOBS, "--determinism"])?;
 
-    step("canaries: every planted bug must be caught");
-    canaries::run(root, &[])?;
+    if arguments.iter().any(|argument| argument == "--no-canaries") {
+        // Say so loudly: a run without canaries has not shown that the detectors above can detect.
+        step("canaries: SKIPPED, so this run does not show the detectors can catch anything");
+    } else {
+        step("canaries: every planted bug must be caught");
+        canaries::run(root, &[])?;
+    }
 
     if arguments.iter().any(|argument| argument == "--mutants") {
         step("mutation testing, bounded");
