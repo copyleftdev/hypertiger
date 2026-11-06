@@ -10,7 +10,6 @@
   --yellow: #ffc800;
   --red: #ff3d2e;
   --tint: #cfd2ee;
-  --ink-soft: #2b3a9c;
   --rule: rgb(244 241 230 / 0.28);
   --pad: clamp(16px, 2.2vw, 32px);
   --h: min(16.2vw, 23vh);
@@ -70,7 +69,7 @@ main, .foot { position: relative; z-index: 2; }
   will-change: transform;
 }
 .tag[hidden], .leader[hidden] { display: none; }
-.leader { position: absolute; left: 0; top: 0; height: 1px; background: var(--paper); transform-origin: 0 50%; }
+.leader { position: absolute; left: 0; top: 0; height: 1px; background: var(--rule); transform-origin: 0 50%; }
 .tag b { font-weight: 400; color: var(--yellow); }
 .tag i { font-style: normal; color: var(--tint); }
 .tag[data-state="never"] b, .tag[data-state="landed"] b { color: var(--paper); }
@@ -321,7 +320,10 @@ h1 { margin: 0; font: 400 var(--h) / 0.9 var(--display); letter-spacing: -0.008e
   .roomy { display: none; }
   .answer, .run { position: static; max-width: none; margin-top: 10px; padding: 4px 6px; font-size: 16px; }
   .command code { font-size: 11.5px; }
-  .copy { padding: 8px 10px; min-width: 66px; font-size: 20px; align-self: center; }
+  .copy { padding: 8px 10px; min-width: 66px; min-height: 44px; font-size: 20px; align-self: center; }
+  .transport, .film { height: 44px; }
+  #scrub::-webkit-slider-thumb { height: 44px; }
+  #scrub::-moz-range-thumb { height: 44px; }
   .wide { font-size: 11.5px; padding: 0 7px; }
   .columns { grid-template-columns: minmax(0, 1fr); }
   .scan-log, .scan-log tbody, .scan-log tr { display: block; }

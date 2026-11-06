@@ -343,7 +343,7 @@ class Page {
       const state = this.time < settled ? "doubt" : never ? "never" : "landed";
       tag.hidden = false;
       tag.dataset.state = state;
-      tag.firstElementChild.textContent = state === "doubt" ? "in doubt, counted in full"
+      tag.firstElementChild.textContent = state === "doubt" ? (docked ? "in doubt" : "in doubt, counted in full")
         : state === "never" ? "never landed" : "landed after all";
       tag.lastElementChild.textContent = `${order.s} ${COINS[order.m]}`;
       if (docked) this.dockTag(tag, used - 1, x, y);
@@ -445,6 +445,12 @@ class Page {
     this.flat();
     this.updateHud();
     addEventListener("resize", () => this.flat());
+    // This plate has no shader to dim, so past the first plate the whole canvas steps back.
+    const stepBack = () => {
+      canvas.style.opacity = scrollY > innerHeight * 0.6 ? "0.1" : "1";
+    };
+    addEventListener("scroll", stepBack, { passive: true });
+    stepBack();
   }
 }
 

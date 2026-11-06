@@ -1,0 +1,341 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-06T08:28:19+00:00",
+  "title": "Design System: hypertiger landing page",
+  "extensions": {
+    "colorMeta": {
+      "plate-cobalt": {
+        "role": "primary",
+        "displayName": "Plate Cobalt",
+        "canonical": "#0a1c8a",
+        "tonalRamp": [
+          "oklch(15.0% 0.103 266.0)",
+          "oklch(26.4% 0.178 266.0)",
+          "oklch(37.9% 0.178 266.0)",
+          "oklch(49.3% 0.178 266.0)",
+          "oklch(60.7% 0.178 266.0)",
+          "oklch(72.1% 0.144 266.0)",
+          "oklch(83.6% 0.081 266.0)",
+          "oklch(95.0% 0.024 266.0)"
+        ]
+      },
+      "plate-cobalt-deep": {
+        "role": "neutral",
+        "displayName": "Plate Cobalt Deep",
+        "canonical": "#081569",
+        "tonalRamp": [
+          "oklch(15.0% 0.102 266.6)",
+          "oklch(26.4% 0.143 266.6)",
+          "oklch(37.9% 0.143 266.6)",
+          "oklch(49.3% 0.143 266.6)",
+          "oklch(60.7% 0.143 266.6)",
+          "oklch(72.1% 0.143 266.6)",
+          "oklch(83.6% 0.080 266.6)",
+          "oklch(95.0% 0.023 266.6)"
+        ]
+      },
+      "track-paper": {
+        "role": "neutral",
+        "displayName": "Track Paper",
+        "canonical": "#f4f1e6",
+        "tonalRamp": [
+          "oklch(15.0% 0.015 94.2)",
+          "oklch(26.4% 0.015 94.2)",
+          "oklch(37.9% 0.015 94.2)",
+          "oklch(49.3% 0.015 94.2)",
+          "oklch(60.7% 0.015 94.2)",
+          "oklch(72.1% 0.015 94.2)",
+          "oklch(83.6% 0.015 94.2)",
+          "oklch(95.0% 0.015 94.2)"
+        ]
+      },
+      "doubt-yellow": {
+        "role": "secondary",
+        "displayName": "Doubt Yellow",
+        "canonical": "#ffc800",
+        "tonalRamp": [
+          "oklch(15.0% 0.031 88.5)",
+          "oklch(26.4% 0.054 88.5)",
+          "oklch(37.9% 0.077 88.5)",
+          "oklch(49.3% 0.100 88.5)",
+          "oklch(60.7% 0.123 88.5)",
+          "oklch(72.1% 0.147 88.5)",
+          "oklch(83.6% 0.170 88.5)",
+          "oklch(95.0% 0.059 88.5)"
+        ]
+      },
+      "never-red": {
+        "role": "tertiary",
+        "displayName": "Never Red",
+        "canonical": "#ff3d2e",
+        "tonalRamp": [
+          "oklch(15.0% 0.063 29.3)",
+          "oklch(26.4% 0.108 29.3)",
+          "oklch(37.9% 0.155 29.3)",
+          "oklch(49.3% 0.201 29.3)",
+          "oklch(60.7% 0.231 29.3)",
+          "oklch(72.1% 0.173 29.3)",
+          "oklch(83.6% 0.091 29.3)",
+          "oklch(95.0% 0.025 29.3)"
+        ]
+      },
+      "caption-tint": {
+        "role": "neutral",
+        "displayName": "Caption Tint",
+        "canonical": "#cfd2ee",
+        "tonalRamp": [
+          "oklch(15.0% 0.039 280.7)",
+          "oklch(26.4% 0.039 280.7)",
+          "oklch(37.9% 0.039 280.7)",
+          "oklch(49.3% 0.039 280.7)",
+          "oklch(60.7% 0.039 280.7)",
+          "oklch(72.1% 0.039 280.7)",
+          "oklch(83.6% 0.039 280.7)",
+          "oklch(95.0% 0.024 280.7)"
+        ]
+      },
+      "hairline-rule": {
+        "role": "neutral",
+        "displayName": "Hairline Rule",
+        "canonical": "rgb(244 241 230 / 0.28)",
+        "tonalRamp": [
+          "oklch(15.0% 0.015 94.2 / 0.28)",
+          "oklch(26.4% 0.015 94.2 / 0.28)",
+          "oklch(37.9% 0.015 94.2 / 0.28)",
+          "oklch(49.3% 0.015 94.2 / 0.28)",
+          "oklch(60.7% 0.015 94.2 / 0.28)",
+          "oklch(72.1% 0.015 94.2 / 0.28)",
+          "oklch(83.6% 0.015 94.2 / 0.28)",
+          "oklch(95.0% 0.015 94.2 / 0.28)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "The opening question, on three staggered lines that fill the width."
+      },
+      "display-close": {
+        "displayName": "Display Close",
+        "purpose": "The closing line."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Section headings, in sentence case."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Story captions, reader headings and scan log claims."
+      },
+      "action": {
+        "displayName": "Action",
+        "purpose": "The copy button."
+      },
+      "lede": {
+        "displayName": "Lede",
+        "purpose": "Section introductions, to 66ch."
+      },
+      "answer": {
+        "displayName": "Answer",
+        "purpose": "The short statement set beside the headline."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Reading text, to 62ch."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Track tags and the scan readout."
+      },
+      "code": {
+        "displayName": "Code",
+        "purpose": "Code exhibits."
+      }
+    },
+    "shadows": [],
+    "motion": [
+      {
+        "name": "ease-film",
+        "value": "cubic-bezier(0.16, 1, 0.3, 1)",
+        "purpose": "The only CSS easing, for every interface state change."
+      },
+      {
+        "name": "duration-control",
+        "value": "180ms",
+        "purpose": "Button fill changes and the copy button's press."
+      },
+      {
+        "name": "duration-disclosure",
+        "value": "240ms",
+        "purpose": "The table disclosure chevron."
+      },
+      {
+        "name": "duration-caption-fade",
+        "value": "420ms",
+        "purpose": "Story caption opacity."
+      },
+      {
+        "name": "duration-caption-rise",
+        "value": "520ms",
+        "purpose": "Story caption rise of 14px."
+      },
+      {
+        "name": "duration-world-collapse",
+        "value": "0.32 simulated s",
+        "purpose": "Bursting of the world that did not happen, offset per bubble by up to half a simulated second."
+      },
+      {
+        "name": "replay-speed",
+        "value": "0.5",
+        "purpose": "Simulated seconds per real second."
+      },
+      {
+        "name": "camera-follow",
+        "value": "1 - exp(-5 * dt)",
+        "purpose": "Per-frame smoothing for camera and plate dimming."
+      },
+      {
+        "name": "copy-feedback",
+        "value": "2400ms",
+        "purpose": "How long the copy button holds its result."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "narrow",
+        "value": "860px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Copy Button",
+      "kind": "button",
+      "refersTo": "copy-button",
+      "description": "The primary action, set in the display face beside a runnable command.",
+      "html": "<button type=\"button\" class=\"ds-copy\">Copy</button>",
+      "css": ".ds-copy { min-width: 78px; padding: 10px 14px; border: 0; background: var(--yellow); color: var(--cobalt); font: 400 22px/1 var(--display); letter-spacing: 0.02em; cursor: pointer; transition: background-color 180ms cubic-bezier(0.16, 1, 0.3, 1), transform 180ms cubic-bezier(0.16, 1, 0.3, 1); } .ds-copy:hover { background: var(--paper); } .ds-copy:focus-visible { outline: 2px solid var(--yellow); outline-offset: 3px; } .ds-copy:active { transform: translateY(1px); }"
+    },
+    {
+      "name": "Transport Button",
+      "kind": "button",
+      "refersTo": "transport-button",
+      "description": "Playback controls that sit beside the film strip.",
+      "html": "<button type=\"button\" class=\"ds-transport\">Next doubt</button>",
+      "css": ".ds-transport { height: 42px; min-width: 42px; padding: 0 11px; border: 1px solid var(--rule); background: var(--cobalt); color: var(--paper); font: 12.5px/1 var(--mono); cursor: pointer; transition: background-color 180ms cubic-bezier(0.16, 1, 0.3, 1), color 180ms cubic-bezier(0.16, 1, 0.3, 1); } .ds-transport:hover { background: var(--paper); color: var(--cobalt); } .ds-transport:focus-visible { outline: 2px solid var(--yellow); outline-offset: 3px; }"
+    },
+    {
+      "name": "Film Data Box",
+      "kind": "card",
+      "refersTo": "film-data-box",
+      "description": "A solid panel holding the run clock and counters over the tracks.",
+      "html": "<aside class=\"ds-box\"><p class=\"ds-box-head\"><span>seed 23</span><span class=\"ds-box-val\">023.76 s</span></p><dl class=\"ds-box-list\"><div><dt>in doubt</dt><dd>1</dd></div><div><dt>never landed</dt><dd>0</dd></div><div><dt>landed after all</dt><dd>2</dd></div></dl></aside>",
+      "css": ".ds-box { width: 318px; padding: 8px 10px; background: var(--cobalt); color: var(--paper); font: 14px/1.4 var(--mono); font-variant-numeric: tabular-nums; } .ds-box-head { display: flex; justify-content: space-between; margin: 0; color: var(--tint); } .ds-box-val { color: var(--paper); } .ds-box-list { margin: 6px 0 0; font-size: 13px; } .ds-box-list div { display: flex; justify-content: space-between; border-top: 1px solid var(--rule); padding: 2px 0; } .ds-box-list dt { color: var(--tint); } .ds-box-list dd { margin: 0; }"
+    },
+    {
+      "name": "Track Tag",
+      "kind": "custom",
+      "refersTo": "track-tag",
+      "description": "A mono label following a fork, with a state-coloured bracket to the track.",
+      "html": "<span class=\"ds-tag\"><b>in doubt, counted in full</b><i>1.953 ETH</i></span> <span class=\"ds-tag ds-tag-never\"><b>never landed</b><i>1.749 ETH</i></span>",
+      "css": ".ds-tag { position: relative; display: inline-flex; flex-direction: column; margin: 10px 0 0 12px; padding: 2px 6px; background: var(--cobalt); font: 12px/1.35 var(--mono); white-space: nowrap; } .ds-tag b { font-weight: 400; color: var(--yellow); } .ds-tag i { font-style: normal; color: var(--tint); } .ds-tag::before { content: \"\"; position: absolute; left: -12px; top: -10px; width: 12px; height: 10px; border-left: 1px solid var(--yellow); border-bottom: 1px solid var(--yellow); transform: scaleY(-1) translateY(-10px); } .ds-tag-never b { color: var(--paper); } .ds-tag-never::before { border-color: var(--red); }"
+    },
+    {
+      "name": "Film Strip",
+      "kind": "custom",
+      "refersTo": "film-strip",
+      "description": "The perforated scrubber along the plate's edge, marked with each doubt and its settlement. Static here: the build draws it on a canvas.",
+      "html": "<div class=\"ds-strip\"><svg viewBox=\"0 0 380 42\" width=\"380\" height=\"42\" aria-hidden=\"true\"><path d=\"M4 3h7v4H4zM23 3h7v4h-7zM42 3h7v4h-7zM61 3h7v4h-7zM80 3h7v4h-7zM99 3h7v4h-7zM118 3h7v4h-7zM137 3h7v4h-7zM156 3h7v4h-7zM175 3h7v4h-7zM194 3h7v4h-7zM213 3h7v4h-7zM232 3h7v4h-7zM251 3h7v4h-7zM270 3h7v4h-7zM289 3h7v4h-7zM308 3h7v4h-7zM327 3h7v4h-7zM346 3h7v4h-7zM365 3h7v4h-7zM4 35h7v4H4zM23 35h7v4h-7zM42 35h7v4h-7zM61 35h7v4h-7zM80 35h7v4h-7zM99 35h7v4h-7zM118 35h7v4h-7zM137 35h7v4h-7zM156 35h7v4h-7zM175 35h7v4h-7zM194 35h7v4h-7zM213 35h7v4h-7zM232 35h7v4h-7zM251 35h7v4h-7zM270 35h7v4h-7zM289 35h7v4h-7zM308 35h7v4h-7zM327 35h7v4h-7zM346 35h7v4h-7zM365 35h7v4h-7z\" class=\"ds-strip-p\"/><rect x=\"60\" y=\"15\" width=\"34\" height=\"12\" class=\"ds-strip-y\"/><rect x=\"94\" y=\"11\" width=\"2\" height=\"20\" class=\"ds-strip-p\"/><rect x=\"190\" y=\"15\" width=\"46\" height=\"12\" class=\"ds-strip-y\"/><rect x=\"236\" y=\"15\" width=\"2\" height=\"12\" class=\"ds-strip-r\"/></svg></div>",
+      "css": ".ds-strip { width: 380px; height: 42px; background: var(--cobalt-deep); } .ds-strip svg { display: block; } .ds-strip-p { fill: var(--paper); } .ds-strip-y { fill: var(--yellow); } .ds-strip-r { fill: var(--red); }"
+    },
+    {
+      "name": "Scan Log Row",
+      "kind": "custom",
+      "refersTo": "scan-log",
+      "description": "The paper record, drawn in the plate's own line forms in a single ink.",
+      "html": "<table class=\"ds-log\"><tbody><tr><td><svg class=\"ds-log-mark\" viewBox=\"0 0 64 8\" role=\"img\" aria-label=\"Seen\"><path d=\"M0 4h64\"/></svg></td><th scope=\"row\">Signing matches the official SDK</th><td>178 vectors from the Python SDK</td></tr><tr><td><svg class=\"ds-log-mark ds-log-doubt\" viewBox=\"0 0 64 8\" role=\"img\" aria-label=\"Unsettled\"><path d=\"M0 4h64\"/></svg></td><th scope=\"row\">The settle margin is long enough</th><td>Unmeasured</td></tr><tr><td><svg class=\"ds-log-mark\" viewBox=\"0 0 64 8\" role=\"img\" aria-label=\"Never happened\"><path d=\"M0 4h26\"/><path d=\"M26 0v8\" stroke-width=\"3\"/></svg></td><th scope=\"row\">A real ambiguity resolving</th><td>No order on a funded account</td></tr></tbody></table>",
+      "css": ".ds-log { width: 100%; border-collapse: collapse; border-top: 3px solid var(--cobalt); background: var(--paper); color: var(--cobalt); font: 400 15.5px/1.5 var(--body); } .ds-log tr { border-bottom: 1px solid rgb(10 28 138 / 0.24); } .ds-log th { text-align: left; font: 400 clamp(23px, 2.2vw, 31px)/1.05 var(--display); padding: 12px 18px 12px 0; vertical-align: top; } .ds-log td { padding: 12px 14px 12px 0; vertical-align: top; } .ds-log-mark { width: 64px; height: 12px; display: block; margin-top: 8px; fill: none; stroke: var(--cobalt); stroke-width: 2.5; } .ds-log-doubt path { stroke-dasharray: 7 5; }"
+    },
+    {
+      "name": "Text Link",
+      "kind": "nav",
+      "description": "Links in flat rows, with no navigation bar.",
+      "html": "<p class=\"ds-links\"><a href=\"#\">Read the source</a> <a href=\"#\">Read the design</a> <a href=\"#\">Argue in the issues</a></p>",
+      "css": ".ds-links { display: flex; flex-wrap: wrap; gap: 8px 26px; padding: 6px 10px; background: var(--cobalt); color: var(--paper); font: 18px/1.55 var(--body); } .ds-links a { color: inherit; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 0.22em; } .ds-links a:hover { color: var(--yellow); text-decoration-color: var(--yellow); } .ds-links a:focus-visible { outline: 2px solid var(--yellow); outline-offset: 3px; }"
+    },
+    {
+      "name": "Code Exhibit",
+      "kind": "custom",
+      "description": "Code with no panel behind it, framed by a heavy and a light paper rule.",
+      "html": "<pre class=\"ds-code\"><code><span class=\"ds-code-c\">// Measure this.</span>\nsettle_margin_ms: 2_000,</code></pre>",
+      "css": ".ds-code { margin: 0; padding: 14px 0; overflow-x: auto; border-top: 3px solid var(--paper); border-bottom: 1px solid var(--paper); background: var(--cobalt); color: var(--paper); font: 400 clamp(12.5px, 1.04vw, 15px)/1.62 var(--mono); } .ds-code-c { color: var(--yellow); }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Bubble Chamber",
+    "overview": "The page is one photographic plate from a particle detector. Cobalt film fills the viewport and stays fixed behind everything, and each order in one real simulator run is a track of paper-coloured bubbles curling across it. When a request times out the track forks into both worlds the network could have left, and when the order settles one of those worlds collapses. Everything else on the page is what a physicist would find on the film: etched fiducial crosses, solid data boxes, a perforated strip along the bottom edge, and a single sheet of paper for the written record.\n\nThe density is split on purpose. Poster type at the scale of the viewport sits against tiny, exact instrument readouts, with very little in between. The tone is that of a lab record rather than a product page: the plate reports what happened, and the scan log reports what has not happened yet in the same marks.\n\nThe direction contract rejects the category default for a developer library, a hero, a code block and three feature columns on a dark ground. A code block may still appear as an exhibit, and it does. It is the formula that is refused.",
+    "keyCharacteristics": [
+      "A single drenched colour field, with one paper inversion.",
+      "State carried by line form first and colour second.",
+      "League Gothic at poster scale, Libre Franklin for reading, Fragment Mono for instruments.",
+      "Square, flat furniture on a plate that has real depth.",
+      "A plate that is a pure function of time, which the visitor can scrub in either direction."
+    ],
+    "rules": [
+      {
+        "name": "The Line Form First Rule",
+        "body": "A state must read without its colour: solid is seen or landed, dashed is in doubt, and a stub barred at its end never happened. The scan log proves it by drawing all three in one cobalt ink.",
+        "section": "colors"
+      },
+      {
+        "name": "The One Inversion Rule",
+        "body": "The page inverts to paper exactly once, for the record of what has and has not been seen. Selection, focus and link hover flip to cobalt inside it. A second paper section would spend the only inversion.",
+        "section": "colors"
+      },
+      {
+        "name": "The Red Marks Only Rule",
+        "body": "Never Red never sets text. A never-landed tag keeps its words in paper and gives red to its bracket.",
+        "section": "colors"
+      },
+      {
+        "name": "The Instrument Voice Rule",
+        "body": "Fragment Mono is for what the machine says: code, counters, clocks, readouts, ticks, table headers and the transport controls beside the film. A person's sentence, including evidence with numbers in it, stays in Libre Franklin with tabular figures.",
+        "section": "typography"
+      },
+      {
+        "name": "The Rag Rule",
+        "body": "Opening lines are measured, and the answer and the command sit in the rags of the second and third lines, each starting 22px past the end of its line. On narrow screens the rag is too short to hold anything, so they stack beneath it.",
+        "section": "typography"
+      },
+      {
+        "name": "The Box Or Dim Rule",
+        "body": "Small text never shares the live plate with tracks. On a running plate it sits in a solid cobalt film box; where a whole section reads directly on the film, the plate steps back behind it, dropping its bubbles to 7%. Only poster type stands on the live plate unprotected.",
+        "section": "elevation"
+      },
+      {
+        "name": "The Pure Function Rule",
+        "body": "The picture is computed from the time value alone, so scrubbing backward costs the same as playing and no state can drift from the run it shows. Timing, side, size and outcome come from the run data, and only a track's placement and the exact shape of its curl are arrangement. The film's own furniture, its ground, scratches, grain and fiducials, is the only thing on the plate that does not come from the run.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do drench the page in Plate Cobalt (#0a1c8a) and let the film show through everywhere except the scan log.",
+      "Do give every state a line form before a colour: solid, dashed, or a stub barred at its end.",
+      "Do put small text on the live plate in a solid film box, or dim the plate behind the whole section.",
+      "Do derive every track and state mark from the run data, and keep invented values to a track's placement and curl.",
+      "Do ease interface state with cubic-bezier(0.16, 1, 0.3, 1), at 180ms for controls and 420 to 520ms for captions.",
+      "Do give reduced motion a real frame: a still of the plate with both story orders in doubt, no autoplay, no pinning and no tilt, with the story set out as a plain list.",
+      "Do say what happened in the control that did it, as the copy button does."
+    ],
+    "donts": [
+      "Don't assemble the category default of a hero, a code block and three feature columns on a dark ground.",
+      "Don't add a CSS shadow or a corner radius to furniture. Round forms are for bubbles and tracks.",
+      "Don't set text in Never Red (#ff3d2e). It is 3.85:1 on cobalt.",
+      "Don't add a second paper section. The inversion happens once.",
+      "Don't let state rest on hue alone, on the plate or off it.",
+      "Don't replace the film ground with a CSS gradient. Its variation is development, scratches and grain from the shader.",
+      "Don't set a person's sentences in Fragment Mono.",
+      "Don't draw a track or state mark that does not come from the run. Only the film's ground and fiducials are exempt."
+    ]
+  }
+}
