@@ -2,6 +2,8 @@
 
 [![Tip my tokens](https://tokentip.to/badge/copyleftdev.svg?logo=1)](https://tokentip.to/@copyleftdev)
 
+**[See it work](https://copyleftdev.github.io/hypertiger/)**: one simulator seed, replayed on a film plate you can scrub.
+
 A Hyperliquid library for Rust in the style of [TigerBeetle](https://tigerbeetle.com): no allocation,
 no floats, deterministic simulation, and assertions that stay on.
 

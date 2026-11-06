@@ -1,3 +1,5 @@
 /target
 /mutants.out*
 *.swp
+/.impeccable/questions/
+/.impeccable/review/

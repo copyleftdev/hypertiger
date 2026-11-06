@@ -1,4 +1,5 @@
 [package]
+default-run = "hypertiger-vopr"
 name = "hypertiger-vopr"
 description = "Deterministic simulator for the hypertiger order engine."
 version.workspace = true

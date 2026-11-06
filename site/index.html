@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>hypertiger: a request timed out, so what happened to the order?</title>
+<meta name="description" content="A Hyperliquid library for Rust in the style of TigerBeetle. A timed-out order counts in full, is never resent, and is settled past its deadline. Early alpha, not for real money.">
+<link rel="canonical" href="https://copyleftdev.github.io/hypertiger/">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
+<meta name="theme-color" content="#0a1c8a">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="hypertiger">
+<meta property="og:title" content="A request timed out, so what happened to the order?">
+<meta property="og:description" content="A Hyperliquid library for Rust that counts a timed-out order in full, never resends it, and settles it past its deadline. Early alpha, not for real money.">
+<meta property="og:url" content="https://copyleftdev.github.io/hypertiger/">
+<meta property="og:image" content="https://copyleftdev.github.io/hypertiger/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Particle tracks on a cobalt film plate, drawn from a real simulator run, under the question: a request timed out, so what happened to the order?">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:label1" content="Status">
+<meta name="twitter:data1" content="Early alpha, not for real money">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="manifest" href="site.webmanifest">
+<link rel="preload" href="fonts/LeagueGothic.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="style.css">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[
+{"@type":"WebSite","name":"hypertiger","url":"https://copyleftdev.github.io/hypertiger/"},
+{"@type":"SoftwareSourceCode","name":"hypertiger","description":"A Hyperliquid library for Rust in the style of TigerBeetle. Early alpha, not ready for real money.","codeRepository":"https://github.com/copyleftdev/hypertiger","programmingLanguage":"Rust","version":"0.1.0-alpha.1","creativeWorkStatus":"Early alpha"}
+]}
+</script>
+<script type="module" src="js/main.js"></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to the text</a>
+<canvas id="plate" aria-hidden="true"></canvas>
+<div id="tags" aria-hidden="true">
+  <span class="tag" hidden><b></b><i></i></span>
+  <span class="tag" hidden><b></b><i></i></span>
+  <span class="tag" hidden><b></b><i></i></span>
+  <span class="leader" hidden></span>
+  <span class="leader" hidden></span>
+</div>
+
+<main id="main">
+<section id="hero" class="hero" data-plate aria-labelledby="question">
+  <header class="corner tl box">
+    <a class="mark" href="https://github.com/copyleftdev/hypertiger">hypertiger</a>
+    <p>A Hyperliquid library for Rust, in the style of TigerBeetle.</p>
+    <p class="warn">Early alpha. Not for real money.</p>
+  </header>
+
+  <aside class="corner tr box" aria-label="This run">
+    <p class="data"><span>seed 23</span> <output id="clock">000.00 s</output></p>
+    <dl class="counters data">
+      <div><dt>in doubt</dt><dd id="n-doubt">0</dd></div>
+      <div><dt>never landed</dt><dd id="n-never">0</dd></div>
+      <div><dt>landed after all</dt><dd id="n-landed">0</dd></div>
+      <div><dt>bound failures</dt><dd>0</dd></div>
+    </dl>
+    <p id="scan" class="data scan">No order in doubt at this moment.</p>
+    <p class="note">Every track is an order from one real simulator run, replayed at half speed. Drag the strip to scrub it.</p>
+  </aside>
+
+  <div id="type" class="type">
+    <h1 id="question">
+      <span class="line">a request timed out,</span>
+      <span class="line" id="line2">so what happened</span>
+      <span class="line" id="line3">to the order?</span>
+    </h1>
+    <p class="answer box">It counts in full. It is never resent. Past its deadline, one question settles it.</p>
+    <div class="run box">
+      <div class="command">
+        <code><span class="clone">git clone https://github.com/copyleftdev/hypertiger &amp;&amp; cd hypertiger
+</span>cargo run --release -p hypertiger-vopr -- --seeds 100</code>
+        <button type="button" class="copy" data-copy-button data-copy="git clone https://github.com/copyleftdev/hypertiger &amp;&amp; cd hypertiger &amp;&amp; cargo run --release -p hypertiger-vopr -- --seeds 100">Copy</button>
+        <span class="status" data-copy-status role="status"></span>
+      </div>
+      <p class="note">Run the simulator. <span class="roomy">A hundred seeds finish in seconds. </span>Copy includes the clone.</p>
+    </div>
+  </div>
+
+  <p class="note strip-note">Every track is an order from one real simulator run, replayed at half speed. Drag the strip to scrub it.</p>
+  <div class="strip">
+    <button id="play" type="button" class="transport" aria-label="Pause the run">
+      <svg viewBox="0 0 16 16" aria-hidden="true"><path class="pause" d="M4 2h3v12H4zM9 2h3v12H9z"/><path class="resume" d="M4 2l10 6-10 6z"/></svg>
+    </button>
+    <button id="next" type="button" class="transport wide">Next doubt</button>
+    <div class="film">
+      <canvas id="ticks" aria-hidden="true"></canvas>
+      <input id="scrub" type="range" aria-label="Time in the run, in simulated seconds">
+    </div>
+  </div>
+</section>
+
+<section id="story" class="story" data-plate aria-labelledby="story-title">
+  <div class="story-pin">
+    <h2 id="story-title" class="story-title box">Two orders, five seconds, seed 23.</h2>
+    <aside class="story-read box data" aria-hidden="true">
+      <p><output id="story-clock">000.00 s</output></p>
+      <p><span id="s-doubt">0</span> in doubt</p>
+      <p><span id="s-counted">0.000</span> counted</p>
+    </aside>
+    <ol class="steps">
+      <li class="box" data-t="0">
+        <h3>20.72 s. An order leaves with a deadline.</h3>
+        <p>Buy 1.953 ETH. <code>expiresAfter</code> tells the exchange to refuse it after 22.75 s, and that is what makes the question answerable at all.</p>
+      </li>
+      <li class="box" data-t="22.22">
+        <h3>22.22 s. No usable reply. The track forks.</h3>
+        <p>1.5 seconds have passed. It may have landed or it may not, and nothing on this side of the network can tell which. Dashed means in doubt.</p>
+      </li>
+      <li class="box" data-t="22.75">
+        <h3>22.75 s. The deadline passes, and the doubt stays.</h3>
+        <p>The bar ends the world where it never landed. The engine still counts all 1.953 in full and does not resend. A resend here could put a second order on the book.</p>
+      </li>
+      <li class="box" data-t="23.82">
+        <h3>23.82 s. A second order forks the same way.</h3>
+        <p>Same state, same rule. This one is 1.749 ETH, reduce-only, and it is counted too.</p>
+      </li>
+      <li class="box" data-t="24.77">
+        <h3>24.77 s. The first order turns up.</h3>
+        <p>A fill of 0.371 ETH proves it landed. The world where it did not collapses, and the track goes solid. Nothing had to be guessed.</p>
+      </li>
+      <li class="box" data-t="25.5">
+        <h3>25.50 s. The second never does.</h3>
+        <p>Past its deadline and the 1 second margin, the model exchange says it never saw that client id. That is a proof, so its exposure is released. A stub barred at the deadline is what never landing looks like.</p>
+      </li>
+      <li class="box" data-t="25.98">
+        <h3>Twenty-nine times in this run.</h3>
+        <p>19 were proven never landed and 10 were found to have landed. The bound held at every 10 ms step of the run's 120 simulated seconds, from the moment the engine recovered.</p>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<section id="bound" class="bound" data-plate aria-labelledby="bound-title">
+  <div class="sheet">
+    <h2 id="bound-title">The bound holds in every world.</h2>
+    <p class="lede">White is the range the position could really reach at that moment, read from the model exchange. The yellow edge is the range the engine had counted. Solid yellow past the white is the cost of not knowing. White edged in yellow means the engine counted exactly what could happen. White past its yellow edge would be a failure.</p>
+    <ul class="legend">
+      <li><span class="swatch truth"></span>position it could really reach, from the model</li>
+      <li><span class="swatch counted"></span>the range the engine counted, edge and fill</li>
+    </ul>
+    <div id="chart" class="chart" tabindex="0" aria-describedby="chart-read"></div>
+    <p id="chart-read" class="chart-read" role="status">Move across the chart, or focus it and use the arrow keys, to read a moment.</p>
+    <details class="table-view">
+      <summary>Read the samples as a table</summary>
+      <div class="scroll">
+        <table id="chart-table" class="data">
+          <thead><tr><th scope="col">market</th><th scope="col">time, s</th><th scope="col">possible short</th><th scope="col">possible long</th><th scope="col">bound short</th><th scope="col">bound long</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </details>
+    <p class="fine">Seed 23, sampled every 250 ms. The oracle compares them at every 10 ms step, and a miss fails the seed. This run's 10 landed orders are the engine's own doubts. The simulator's <code>landed_after_timeout</code> counter reads 24 for this seed, because it counts every late arrival at the model exchange. Across 6,000 seeds on an earlier build, 111,827 orders went ambiguous, 98,077 were proven never landed, 59,803 landed after their timeout, and 0 seeds failed. Later runs use harsher worlds. Rebuild this data with <a href="https://github.com/copyleftdev/hypertiger/blob/main/tools/plate.py"><code>tools/plate.py</code></a>.</p>
+  </div>
+</section>
+
+<section id="log" class="log" aria-labelledby="log-title">
+  <div class="log-inner">
+    <h2 id="log-title">What has been seen, and what has not.</h2>
+    <p class="lede">Read in the plate's own marks: solid was seen, dashed is unsettled, and a barred stub never happened.</p>
+    <div class="scroll">
+    <table class="scan-log">
+      <thead>
+        <tr><th scope="col">Mark</th><th scope="col">Claim</th><th scope="col">Evidence</th></tr>
+      </thead>
+      <tbody>
+        <tr class="seen"><td><svg class="mark-line" viewBox="0 0 64 8" role="img" aria-label="Seen"><path d="M0 4h64"/></svg></td><th scope="row">Signing matches the official SDK</th><td class="evidence">178 vectors from the Python SDK, on hash and signature</td></tr>
+        <tr class="seen"><td><svg class="mark-line" viewBox="0 0 64 8" role="img" aria-label="Seen"><path d="M0 4h64"/></svg></td><th scope="row">The live exchange accepts the signatures</th><td class="evidence">Testnet recovered a throwaway signer on 52 action forms, none wrong. Two more are refused for the official SDK too</td></tr>
+        <tr class="seen"><td><svg class="mark-line" viewBox="0 0 64 8" role="img" aria-label="Seen"><path d="M0 4h64"/></svg></td><th scope="row">Reads parse what mainnet sends</th><td class="evidence">43 of 44 requests and all 24 subscriptions accepted. The refusal is a deprecated request</td></tr>
+        <tr class="seen"><td><svg class="mark-line" viewBox="0 0 64 8" role="img" aria-label="Seen"><path d="M0 4h64"/></svg></td><th scope="row">The gate catches planted bugs</th><td class="evidence">34 of 34, on the last full run, which predates the socket refactor</td></tr>
+        <tr class="doubt"><td><svg class="mark-line" viewBox="0 0 64 8" role="img" aria-label="Unsettled"><path d="M0 4h64"/></svg></td><th scope="row">The engine holds against Hyperliquid</th><td class="evidence">Proven against a model of it. A later review found defects the simulator could not, because it shared their assumptions</td></tr>
+        <tr class="doubt"><td><svg class="mark-line" viewBox="0 0 64 8" role="img" aria-label="Unsettled"><path d="M0 4h64"/></svg></td><th scope="row">The settle margin is long enough</th><td class="evidence">Unmeasured, and it is the most consequential number here</td></tr>
+        <tr class="never"><td><svg class="mark-line" viewBox="0 0 64 8" role="img" aria-label="Never happened"><path d="M0 4h26"/><path d="M26 0v8"/></svg></td><th scope="row">A real ambiguity resolving</th><td class="evidence">No order has been placed on a funded account, so no real fill has reached this code</td></tr>
+        <tr class="never"><td><svg class="mark-line" viewBox="0 0 64 8" role="img" aria-label="Never happened"><path d="M0 4h26"/><path d="M26 0v8"/></svg></td><th scope="row">Tests for the socket layer</th><td class="evidence"><code>hypertiger-net</code> has none of its own yet</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p class="links"><a href="https://github.com/copyleftdev/hypertiger/blob/main/docs/DESIGN.md#not-verified">Everything not verified</a> <a href="https://github.com/copyleftdev/hypertiger/blob/main/docs/DESIGN.md#the-assumptions">What it assumes</a> <a href="https://github.com/copyleftdev/hypertiger/blob/main/docs/DESIGN.md#what-the-simulator-found">What the simulator found, and missed</a></p>
+  </div>
+</section>
+
+<section id="readers" class="readers" data-plate aria-labelledby="readers-title">
+  <div class="sheet">
+    <h2 id="readers-title">No <code>Default</code>, on purpose.</h2>
+    <div class="columns">
+      <div>
+        <p class="lede">The configuration has no defaults, because each of these fields changes what can happen to money. That is the whole attitude.</p>
+        <h3>If you run bots</h3>
+        <p>A crash is an ordinary start. The engine waits out whatever a previous life could have left in flight, then adopts what the exchange says is open. There is no local state to corrupt, because the exchange is the log. The settle margin is yours to measure before going live.</p>
+        <h3>If you read Rust</h3>
+        <p>The kernel is <code>no_std</code>, with no <code>alloc</code> and no floats. It takes bytes and gives bytes, depends only on <code>k256</code> and <code>sha3</code>, and keeps its assertions on. It follows TigerBeetle's TigerStyle, and a seed that fails replays exactly.</p>
+      </div>
+<pre class="code"><code><span class="c">// No Default on purpose: each of these changes
+// what can happen to money.</span>
+let config = EngineConfig {
+    network: Network::Testnet,
+    user: wallet.address(),
+    vault: None,
+    tick_ms: 100,
+    order_ttl_ms: 5_000,
+    settle_margin_ms: 2_000, <span class="c">// Measure this.</span>
+    request_timeout_ms: 3_000,
+    queue_ms_max: 2_000,
+    status_poll_ms: 1_000,
+    reconcile_ms: 30_000,
+    fills_wait_ms: 5_000,
+    weight_per_minute: 800,
+    weight_burst: 300,
+    weight_cancel_reserve: 50,
+    fast_cancel: true,
+};</code></pre>
+    </div>
+  </div>
+</section>
+
+<section id="close" class="close" data-plate aria-labelledby="close-title">
+  <h2 id="close-title">run it, then argue with it.</h2>
+  <div class="run box">
+    <div class="command">
+      <code>cargo run --release -p hypertiger-vopr -- --trace 23</code>
+      <button type="button" class="copy" data-copy-button>Copy</button>
+      <span class="status" data-copy-status role="status"></span>
+    </div>
+    <p class="note">This replays the plate above, line by line, from the seed. Same seed, same run.</p>
+  </div>
+  <p class="links"><a href="https://github.com/copyleftdev/hypertiger">Read the source</a> <a href="https://github.com/copyleftdev/hypertiger/blob/main/docs/DESIGN.md">Read the design</a> <a href="https://github.com/copyleftdev/hypertiger/issues">Argue in the issues</a></p>
+</section>
+</main>
+
+<footer class="foot box">
+  <p class="status-line">hypertiger v0.1.0-alpha.1. Early alpha, not ready for real money.</p>
+  <p>No license has been chosen, so no rights are granted beyond reading the code. It follows TigerBeetle's TigerStyle and is not affiliated with TigerBeetle or Hyperliquid. A track's position on the plate is arrangement. Its timing, side, size and outcome are from the run.</p>
+</footer>
+</body>
+</html>

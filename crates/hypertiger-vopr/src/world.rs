@@ -27,6 +27,10 @@ use crate::prng::Prng;
 pub type SimEngine = Engine<64, 2>;
 
 const STEP_MS: u64 = 10;
+/// How much of a request a trace shows: enough for the largest batch the strategy sends.
+const TRACE_BODY_BYTES_MAX: usize = 8192;
+/// How often a trace records the bound beside the truth. `tools/plate.py` reads these lines.
+const TRACE_BOUND_STEPS: u64 = 25;
 const COINS: [&str; 2] = ["BTC", "ETH"];
 const ASSETS: [u32; 2] = [0, 1];
 const LOT: u128 = 100_000;
@@ -900,7 +904,7 @@ impl World {
         let fate = self.profile.fate(&mut self.prng);
         self.say(&format!(
             "send {request_id} {fate:?} {}",
-            String::from_utf8_lossy(&body[..body.len().min(420)])
+            String::from_utf8_lossy(&body[..body.len().min(TRACE_BODY_BYTES_MAX)])
         ));
         let epoch = self.epoch;
         match fate {
@@ -1157,6 +1161,14 @@ impl World {
                 COINS[market],
                 exposure.short_bound.raw(),
                 self.explain(market)
+            ));
+        }
+        if self.trace && self.coverage.steps % TRACE_BOUND_STEPS == 0 {
+            self.say(&format!(
+                "bound {} {long} {short} {} {}",
+                COINS[market],
+                exposure.long_bound.raw(),
+                exposure.short_bound.raw()
             ));
         }
         Ok(())

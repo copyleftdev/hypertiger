@@ -1,0 +1,13 @@
+# hypertiger
+
+> A Hyperliquid library for Rust in the style of TigerBeetle. Early alpha, not ready for real money: no order has been placed on a funded account.
+
+Its order engine answers one question: a request timed out, so what happened to the order? An order sent with `expiresAfter` has a deadline by which it landed or never will. So a timed-out order counts in full against the risk limit, is never resent, and is settled for certain once the deadline and a margin have passed.
+
+The bound is checked at every step of a deterministic simulator, against a model of the exchange, not against Hyperliquid itself.
+
+- [Repository](https://github.com/copyleftdev/hypertiger)
+- [Design, including what is not verified](https://github.com/copyleftdev/hypertiger/blob/main/docs/DESIGN.md)
+- [Plate data: seed 23 of the simulator](https://copyleftdev.github.io/hypertiger/plate.json)
+
+No license has been chosen. Not affiliated with TigerBeetle or Hyperliquid.

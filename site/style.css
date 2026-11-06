@@ -1,0 +1,348 @@
+@font-face { font-family: "League Gothic"; src: url("fonts/LeagueGothic.woff2") format("woff2"); font-display: swap; }
+@font-face { font-family: "Libre Franklin"; src: url("fonts/LibreFranklin-400.woff2") format("woff2"); font-weight: 400; font-display: swap; }
+@font-face { font-family: "Libre Franklin"; src: url("fonts/LibreFranklin-600.woff2") format("woff2"); font-weight: 600; font-display: swap; }
+@font-face { font-family: "Fragment Mono"; src: url("fonts/FragmentMono.woff2") format("woff2"); font-display: swap; }
+
+:root {
+  --cobalt: #0a1c8a;
+  --cobalt-deep: #081569;
+  --paper: #f4f1e6;
+  --yellow: #ffc800;
+  --red: #ff3d2e;
+  --tint: #cfd2ee;
+  --ink-soft: #2b3a9c;
+  --rule: rgb(244 241 230 / 0.28);
+  --pad: clamp(16px, 2.2vw, 32px);
+  --h: min(16.2vw, 23vh);
+  --display: "League Gothic", "Arial Narrow", sans-serif;
+  --body: "Libre Franklin", "Franklin Gothic Book", sans-serif;
+  --mono: "Fragment Mono", ui-monospace, monospace;
+  color-scheme: dark;
+  scrollbar-color: var(--yellow) var(--cobalt-deep);
+}
+
+* { box-sizing: border-box; }
+html { background: var(--cobalt); -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  color: var(--paper);
+  font: 400 17px/1.55 var(--body);
+  -webkit-font-smoothing: antialiased;
+}
+::selection { background: var(--yellow); color: var(--cobalt); }
+.log ::selection { background: var(--cobalt); color: var(--paper); }
+::-webkit-scrollbar { width: 12px; height: 12px; }
+::-webkit-scrollbar-track { background: var(--cobalt-deep); }
+::-webkit-scrollbar-thumb { background: var(--yellow); border: 3px solid var(--cobalt-deep); }
+:focus-visible { outline: 2px solid var(--yellow); outline-offset: 3px; }
+.log :focus-visible { outline-color: var(--cobalt); }
+
+a { color: inherit; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 0.22em; }
+a:hover { text-decoration-color: var(--yellow); color: var(--yellow); }
+.log a:hover { color: var(--cobalt); text-decoration-thickness: 3px; text-decoration-color: var(--cobalt); }
+p { margin: 0; }
+code, pre, .data { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+code { font-size: 0.92em; }
+h2, h3 { text-wrap: balance; }
+
+.skip { position: fixed; left: 12px; top: -60px; z-index: 30; background: var(--yellow); color: var(--cobalt); padding: 10px 14px; }
+.skip:focus { top: 12px; }
+.skip:hover { color: var(--cobalt); text-decoration-color: var(--cobalt); }
+
+#plate { position: fixed; inset: 0; width: 100%; height: 100%; z-index: 0; display: block; }
+main, .foot { position: relative; z-index: 2; }
+
+/* Film data boxes: solid, because that is what they were, and so tracks never run through small text. */
+.box { background: var(--cobalt); }
+
+#tags { position: fixed; inset: 0; z-index: 1; pointer-events: none; overflow: hidden; }
+.tag {
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 2px 6px;
+  margin: 10px 0 0 12px;
+  background: var(--cobalt);
+  font: 12px/1.35 var(--mono);
+  white-space: nowrap;
+  will-change: transform;
+}
+.tag[hidden], .leader[hidden] { display: none; }
+.leader { position: absolute; left: 0; top: 0; height: 1px; background: var(--paper); transform-origin: 0 50%; }
+.tag b { font-weight: 400; color: var(--yellow); }
+.tag i { font-style: normal; color: var(--tint); }
+.tag[data-state="never"] b, .tag[data-state="landed"] b { color: var(--paper); }
+.tag::before {
+  content: "";
+  position: absolute;
+  left: -12px;
+  top: -10px;
+  width: 12px;
+  height: 10px;
+  border-left: 1px solid var(--yellow);
+  border-bottom: 1px solid var(--yellow);
+  transform: scaleY(-1) translateY(-10px);
+}
+.tag[data-state="never"]::before { border-color: var(--red); }
+.tag[data-state="landed"]::before { border-color: var(--paper); }
+
+/* The first plate */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  min-height: 100svh;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  padding: var(--pad) var(--pad) 0;
+}
+.corner { padding: 8px 10px; font-size: 14px; line-height: 1.4; }
+.tl { position: absolute; left: var(--pad); top: var(--pad); max-width: 260px; }
+.tr { position: absolute; right: var(--pad); top: var(--pad); width: 318px; }
+.mark { font: 400 38px/1 var(--display); display: block; text-decoration: none; margin-bottom: 6px; }
+.warn { color: var(--yellow); font-weight: 600; margin-top: 4px; }
+.tr > p.data { display: flex; justify-content: space-between; color: var(--tint); }
+.tr output { color: var(--paper); }
+.counters { margin: 6px 0 8px; font-size: 13px; }
+.counters div { display: flex; justify-content: space-between; border-top: 1px solid var(--rule); padding: 2px 0; }
+.counters dt { color: var(--tint); }
+.counters dd { margin: 0; color: var(--paper); }
+.scan { min-height: 2.8em; font-size: 12px; line-height: 1.4; }
+.note { font-size: 13px; color: var(--tint); margin-top: 4px; }
+.strip-note { display: none; }
+
+.type { grid-row: 2; align-self: end; position: relative; padding-bottom: clamp(10px, 2vh, 22px); }
+h1 { margin: 0; font: 400 var(--h) / 0.9 var(--display); letter-spacing: -0.008em; }
+.line { display: table; white-space: nowrap; }
+/* A stagger, so the descenders of one line fall between the ascenders of the next. */
+#line2 { margin-left: 0.5em; letter-spacing: -0.014em; }
+.answer {
+  position: absolute;
+  left: calc(var(--l2, 60%) + 22px);
+  right: 0;
+  top: calc(var(--h) * 0.92);
+  padding: 2px 8px;
+  max-width: 340px;
+  font-size: clamp(15px, 1.42vw, 21px);
+  font-weight: 600;
+  line-height: 1.32;
+}
+.run {
+  position: absolute;
+  left: calc(var(--l3, 50%) + 22px);
+  right: 0;
+  bottom: clamp(10px, 2vh, 22px);
+  padding: 6px 8px;
+}
+.command { position: relative; display: flex; align-items: stretch; gap: 8px; }
+.command code {
+  flex: 1;
+  min-width: 0;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  font-size: clamp(11.5px, 0.88vw, 14px);
+  line-height: 1.5;
+  align-self: center;
+}
+.copy {
+  flex: none;
+  min-width: 78px;
+  padding: 10px 14px;
+  border: 0;
+  background: var(--yellow);
+  color: var(--cobalt);
+  font: 400 22px/1 var(--display);
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  transition: background-color 180ms cubic-bezier(0.16, 1, 0.3, 1), transform 180ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+.copy:hover { background: var(--paper); }
+.copy:active { transform: translateY(1px); }
+.status { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+
+/* The strip along the plate's bottom edge is the film itself: perforated, and marked with every doubt. */
+.strip {
+  grid-row: 3;
+  display: flex;
+  gap: 6px;
+  margin: 0 calc(var(--pad) * -1);
+  padding: 0 var(--pad) 10px;
+  align-items: stretch;
+}
+.transport {
+  flex: none;
+  height: 42px;
+  min-width: 42px;
+  padding: 0 11px;
+  border: 1px solid var(--rule);
+  background: var(--cobalt);
+  color: var(--paper);
+  font: 12.5px/1 var(--mono);
+  cursor: pointer;
+  transition: background-color 180ms cubic-bezier(0.16, 1, 0.3, 1), color 180ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+.transport:hover { background: var(--paper); color: var(--cobalt); }
+.transport svg { width: 16px; height: 16px; display: block; margin: auto; fill: currentColor; }
+.transport[data-state="playing"] .resume, .transport[data-state="paused"] .pause { display: none; }
+.film {
+  position: relative;
+  flex: 1;
+  height: 42px;
+  min-width: 0;
+  background-color: var(--cobalt-deep);
+}
+#ticks { position: absolute; inset: 0; width: 100%; height: 100%; }
+#scrub { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; appearance: none; -webkit-appearance: none; background: transparent; cursor: ew-resize; }
+#scrub::-webkit-slider-thumb { -webkit-appearance: none; width: 11px; height: 42px; background: linear-gradient(var(--paper), var(--paper)) center / 3px 100% no-repeat, rgb(244 241 230 / 0.2); border: 0; }
+#scrub::-moz-range-thumb { width: 11px; height: 42px; border: 0; border-radius: 0; background: linear-gradient(var(--paper), var(--paper)) center / 3px 100% no-repeat, rgb(244 241 230 / 0.2); }
+
+/* The story */
+.story { position: relative; }
+.story-pin { padding: var(--pad); }
+.story-title { font: 400 clamp(40px, 5.2vw, 76px) / 0.95 var(--display); margin: 0; padding: 4px 10px; width: fit-content; }
+.story-read { display: none; }
+.steps { list-style: none; margin: 24px 0 0; padding: 0; display: grid; gap: 14px; max-width: 480px; }
+.steps li { padding: 12px 14px; }
+.steps h3 { margin: 0 0 6px; font: 400 clamp(26px, 2.7vw, 38px) / 1.02 var(--display); color: var(--paper); }
+.steps p { font-size: 16px; line-height: 1.5; }
+
+.pinned .story { height: 720vh; }
+.pinned .story-pin { position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden; }
+.pinned .story-read { display: block; position: absolute; right: var(--pad); top: var(--pad); padding: 8px 12px; font-size: 14px; color: var(--tint); text-align: right; }
+.pinned .story-read output, .pinned .story-read span { color: var(--paper); }
+.pinned .steps { position: absolute; left: var(--pad); bottom: var(--pad); margin: 0; display: block; width: min(500px, calc(100vw - var(--pad) * 2)); }
+.pinned .steps li {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 420ms cubic-bezier(0.16, 1, 0.3, 1), transform 520ms cubic-bezier(0.16, 1, 0.3, 1);
+  visibility: hidden;
+}
+.pinned .steps li.on { opacity: 1; transform: none; visibility: visible; }
+
+/* The bound */
+.bound, .readers { padding: clamp(70px, 12vh, 140px) var(--pad); }
+.sheet { max-width: 1180px; margin: 0 auto; }
+.sheet h2, .log h2 { margin: 0 0 12px; font: 400 clamp(48px, 7.2vw, 108px) / 0.92 var(--display); }
+.sheet h2 code, .log h2 code { font-family: inherit; font-size: 1em; color: var(--yellow); }
+.lede { max-width: 66ch; font-size: clamp(17px, 1.4vw, 20px); line-height: 1.5; }
+.legend { list-style: none; display: flex; flex-wrap: wrap; gap: 6px 22px; margin: 22px 0 10px; padding: 0; font-size: 14px; color: var(--tint); }
+.legend li { display: flex; align-items: center; gap: 8px; }
+.swatch { width: 14px; height: 14px; background: var(--paper); display: inline-block; }
+.swatch.counted { background: var(--yellow); }
+.chart { width: 100%; cursor: crosshair; }
+.chart svg { display: block; width: 100%; }
+.chart .grid { stroke: var(--rule); stroke-dasharray: 1 5; }
+.chart .axis { stroke: var(--rule); }
+.chart .tick { fill: var(--tint); font: 11.5px var(--mono); }
+.chart .coin { fill: var(--paper); font: 400 24px var(--display); }
+.chart .truth-area { fill: var(--paper); stroke: var(--paper); stroke-width: 1; stroke-linejoin: round; }
+.chart .bound-area { fill: var(--yellow); }
+.chart .bound-edge { fill: none; stroke: var(--yellow); stroke-width: 1.5; stroke-linejoin: round; }
+@media (max-width: 860px) { .chart .bound-edge { stroke-width: 1; } }
+.chart .cross { stroke: var(--paper); stroke-width: 1; }
+.chart-read { min-height: 3em; margin-top: 10px; font-size: 14px; color: var(--tint); font-variant-numeric: tabular-nums; }
+.table-view { margin-top: 8px; font-size: 14px; }
+.table-view summary { cursor: pointer; list-style: none; width: fit-content; text-decoration: underline; text-underline-offset: 0.22em; text-decoration-thickness: 1px; }
+.table-view summary::-webkit-details-marker { display: none; }
+.table-view summary::before { content: ""; display: inline-block; width: 7px; height: 7px; margin: 0 10px 2px 2px; border-right: 1.5px solid currentColor; border-bottom: 1.5px solid currentColor; transform: rotate(-45deg); transition: transform 240ms cubic-bezier(0.16, 1, 0.3, 1); }
+.table-view[open] summary::before { transform: rotate(45deg); }
+.table-view summary:hover { color: var(--yellow); }
+.scroll { overflow-x: auto; }
+.table-view .scroll { max-height: 280px; margin-top: 10px; }
+.table-view table { border-collapse: collapse; font-size: 12.5px; width: 100%; }
+.table-view th, .table-view td { text-align: right; padding: 3px 10px; border-bottom: 1px solid var(--rule); font-weight: 400; white-space: nowrap; }
+.fine { max-width: 76ch; margin-top: 20px; font-size: 14px; color: var(--tint); }
+
+/* The scan log: the one inversion, printed on paper. */
+.log { position: relative; background: var(--paper); color: var(--cobalt); padding: clamp(70px, 11vh, 130px) var(--pad); }
+.log-inner { max-width: 1120px; margin: 0 auto; }
+.log .lede { margin-bottom: 30px; }
+.scan-log { width: 100%; border-collapse: collapse; border-top: 3px solid var(--cobalt); }
+.scan-log thead th { text-align: left; font: 13px var(--mono); padding: 8px 14px 8px 0; border-bottom: 1px solid var(--cobalt); }
+.scan-log tbody th { text-align: left; font: 400 clamp(23px, 2.2vw, 31px) / 1.05 var(--display); padding: 12px 18px 12px 0; width: 38%; vertical-align: top; }
+.scan-log td { padding: 12px 14px 12px 0; vertical-align: top; }
+.scan-log td.evidence { font-size: 15.5px; line-height: 1.5; font-variant-numeric: tabular-nums; }
+.scan-log tbody tr { border-bottom: 1px solid rgb(10 28 138 / 0.24); }
+.mark-line { width: 64px; height: 12px; display: block; margin-top: 8px; fill: none; stroke: var(--cobalt); stroke-width: 2.5; }
+.doubt .mark-line path { stroke-dasharray: 7 5; }
+.never .mark-line path + path { stroke-width: 3; }
+.links { display: flex; flex-wrap: wrap; gap: 8px 26px; margin-top: 26px; font-size: 16px; }
+
+/* Readers */
+.columns { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(24px, 5vw, 80px); margin-top: 22px; align-items: start; }
+.columns h3 { margin: 26px 0 6px; font: 400 clamp(28px, 2.6vw, 36px) / 1 var(--display); color: var(--yellow); }
+.columns p:not(.lede) { max-width: 62ch; }
+.code {
+  margin: 0;
+  padding: 14px 0;
+  overflow-x: auto;
+  border-top: 3px solid var(--paper);
+  border-bottom: 1px solid var(--paper);
+  font-size: clamp(12.5px, 1.04vw, 15px);
+  line-height: 1.62;
+  tab-size: 4;
+}
+.code .c { color: var(--yellow); }
+
+/* The close */
+.close { min-height: 92vh; display: flex; flex-direction: column; justify-content: flex-end; padding: var(--pad); padding-top: 18vh; }
+.close h2 { margin: 0 0 0.2em; font: 400 min(15.5vw, 34vh) / 0.82 var(--display); letter-spacing: -0.008em; }
+.close .run { position: static; max-width: 700px; padding: 10px 12px; }
+.close .command code { font-size: clamp(13px, 1.1vw, 16px); }
+.close .links { padding: 6px 10px; width: fit-content; background: var(--cobalt); font-size: 18px; }
+
+.foot { padding: 18px var(--pad) 26px; font-size: 13.5px; color: var(--tint); display: grid; gap: 6px; }
+.foot p { max-width: 90ch; }
+.foot .status-line { color: var(--paper); font-weight: 600; }
+
+/* Narrow plates stack, because the rag is too short to hold anything. */
+@media (max-width: 860px) {
+  :root { --h: min(20.5vw, 12vh); }
+  .corner { padding: 6px 8px; font-size: 12.5px; line-height: 1.32; }
+  .tl { max-width: 47%; }
+  .mark { font-size: 32px; margin-bottom: 4px; }
+  .warn { font-size: 13px; }
+  .tr { width: 48%; }
+  .tr > p.data { font-size: 12px; }
+  .tr > p.scan, .tr > .note, .clone { display: none; }
+  .counters { font-size: 11.5px; margin: 3px 0 0; }
+  .counters dt { white-space: nowrap; }
+  .hero { padding-top: 164px; grid-template-rows: 1fr auto auto; }
+  .type { grid-row: 1; }
+  .strip-note { display: block; grid-row: 2; margin: 0 0 8px; padding: 2px 6px; background: var(--cobalt); }
+  .strip { grid-row: 3; }
+  .line { display: inline; white-space: normal; }
+  #line2 { margin-left: 0; }
+  .roomy { display: none; }
+  .answer, .run { position: static; max-width: none; margin-top: 10px; padding: 4px 6px; font-size: 16px; }
+  .command code { font-size: 11.5px; }
+  .copy { padding: 8px 10px; min-width: 66px; font-size: 20px; align-self: center; }
+  .wide { font-size: 11.5px; padding: 0 7px; }
+  .columns { grid-template-columns: minmax(0, 1fr); }
+  .scan-log, .scan-log tbody, .scan-log tr { display: block; }
+  .scan-log thead { display: none; }
+  .scan-log tbody tr { display: grid; grid-template-columns: 64px minmax(0, 1fr); column-gap: 12px; padding: 12px 0; }
+  .scan-log tbody th { width: auto; padding: 0; font-size: 25px; }
+  .scan-log td { padding: 0; }
+  .scan-log td.evidence { grid-column: 2; margin-top: 4px; font-size: 15px; }
+  .tag { font-size: 11px; }
+  .pinned .story-read { font-size: 12px; }
+  .steps h3 { font-size: 28px; }
+  .steps p { font-size: 15px; }
+  .close h2 { font-size: 25vw; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; scroll-behavior: auto !important; }
+}
+
+@media (forced-colors: active) {
+  .mark-line, .mark-line path { stroke: CanvasText; }
+  .swatch { background: CanvasText; }
+}
+.tag[data-flip="1"]::before { display: none; }

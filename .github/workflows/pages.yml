@@ -1,0 +1,37 @@
+name: Pages
+
+on:
+  push:
+    branches: [main]
+    paths: ["site/**", ".github/workflows/pages.yml"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages-deploy
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - name: Check the site is whole
+        run: |
+          for file in index.html style.css plate.json og.png .nojekyll js/main.js js/plate.js vendor/three.module.min.js; do
+            test -f "site/$file" || { echo "missing site/$file"; exit 1; }
+          done
+          python3 -c "import json; d = json.load(open('site/plate.json')); assert d['failed'] is False"
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+      - uses: actions/deploy-pages@v4
+        id: deployment
