@@ -1,0 +1,14 @@
+# cargo-mutants configuration. Run it only through `bounded-mutants`.
+
+# Every kernel mutant is judged by the whole workspace's tests, the simulator's small campaign among
+# them: an engine mutant only a bad world can see is still caught.
+test_workspace = true
+
+# Mutants no test can tell apart from the original. Each needs a reason, and the list stays short:
+# a mutant belongs here only when it cannot be observed, never because it is hard to.
+exclude_re = [
+    # Formatting for humans. No contract covers this text.
+    'impl (core::)?fmt::(Debug|Display)',
+    'impl Debug for',
+    'impl Display for',
+]

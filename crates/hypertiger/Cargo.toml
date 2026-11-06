@@ -1,0 +1,15 @@
+[package]
+name = "hypertiger"
+description = "A Hyperliquid kernel in the TigerBeetle style: no_std, no allocation, no floats, deterministic."
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+repository.workspace = true
+publish.workspace = true
+
+[dependencies]
+k256.workspace = true
+sha3.workspace = true
+
+[lints]
+workspace = true

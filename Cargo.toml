@@ -1,0 +1,65 @@
+[workspace]
+resolver = "3"
+members = ["crates/*", "xtask"]
+
+[workspace.package]
+version = "0.1.0-alpha.1"
+edition = "2024"
+rust-version = "1.85"
+repository = "https://github.com/copyleftdev/hypertiger"
+publish = false
+
+# The kernel may depend on cryptography and nothing else (docs/STYLE.md). TLS lives at the edge.
+[workspace.dependencies]
+k256 = { version = "0.13", default-features = false, features = ["ecdsa", "arithmetic"] }
+sha3 = { version = "0.10", default-features = false }
+rustls = { version = "0.23", default-features = false, features = ["std", "ring", "tls12"] }
+webpki-roots = "1"
+hypertiger = { path = "crates/hypertiger" }
+
+[workspace.lints.rust]
+unsafe_code = "forbid"
+missing_debug_implementations = "warn"
+unused_must_use = "deny"
+
+[workspace.lints.clippy]
+pedantic = { level = "warn", priority = -1 }
+missing_errors_doc = "allow"
+missing_panics_doc = "allow"
+module_name_repetitions = "allow"
+too_many_lines = "warn"
+unwrap_used = "warn"
+expect_used = "warn"
+float_arithmetic = "deny"
+float_cmp = "deny"
+as_underscore = "warn"
+mem_forget = "deny"
+exit = "warn"
+# Every target is 64-bit (asserted at compile time in the kernel), and a narrowing cast there is
+# always guarded by an assertion or a bound on the line before: see docs/STYLE.md.
+cast_possible_truncation = "allow"
+cast_possible_wrap = "allow"
+cast_sign_loss = "allow"
+# Nothing here is a library meant to be read as prose in rustdoc; names are spelled in comments.
+doc_markdown = "allow"
+# `assert!(a == b)` reads as the invariant it states, and the kernel keeps it free of formatting.
+manual_assert = "allow"
+manual_assert_eq = "allow"
+# TigerStyle wants related names the same length, which is what this lint objects to.
+similar_names = "allow"
+
+# Assertions stay on in every build: they turn a correctness bug into a crash, and on an exchange
+# a crash is the cheap outcome.
+[profile.release]
+overflow-checks = true
+debug = "line-tables-only"
+lto = "thin"
+codegen-units = 4
+panic = "unwind"
+
+[profile.dev]
+opt-level = 1
+
+# Signing and recovery dominate a simulation if they run unoptimized.
+[profile.dev.package."*"]
+opt-level = 3
