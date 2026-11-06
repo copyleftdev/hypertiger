@@ -163,9 +163,10 @@ Stated plainly, because a green gate reads as more than it is.
   simulator is confidently testing the wrong thing. The simulator proves the engine correct against the
   model, not against the exchange.
 - **`Session` and `conn` are the least-tested code here.** They have run against the real server in the
-  normal case only. Reconnects, partial writes, fragmentation, the silence detector, the clock-step halt
-  and the full-buffer check are reasoned about and not exercised, because the simulator stops at the
-  engine's API and does not see `hypertiger-net`.
+  normal case only. Unit tests over a scripted stream cover frames ahead of a stream failure and the
+  list of feeds restored on connecting. TLS, the handshake, reconnect timing, partial writes,
+  fragmentation, the silence detector, the clock-step halt and the full-buffer check are reasoned about
+  and not exercised, because the simulator stops at the engine's API and does not see `hypertiger-net`.
 - **Lowering `order_ttl_ms` across a restart** ends quarantine before the previous life's longer expiries
   have passed. Quarantine trusts the current config.
 - **Spot positions** are not loaded at recovery, because `clearinghouseState` covers only the default

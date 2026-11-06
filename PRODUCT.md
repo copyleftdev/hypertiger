@@ -32,7 +32,7 @@ Evaluated by reading the repository, `docs/DESIGN.md`, and running `hypertiger-v
 - Every documented action is typed, except deployer and validator actions.
 - Status: early alpha, tagged `v0.1.0-alpha.1`. Not ready for real money. No order has been placed on a funded account.
 - The simulator proves the engine against a model of the exchange, not against Hyperliquid.
-- `hypertiger-net`, the socket layer, has no tests of its own.
+- `hypertiger-net`, the socket layer, has unit tests over a scripted stream only. TLS, the handshake and reconnect timing have no tests.
 - No license has been chosen, so the page must not imply one.
 
 ## Brand Commitments
